@@ -11,7 +11,7 @@ class sendSMSTask():
         self.smsConnection.login(FetionOnline)
         
     def sendSMS(self,message):
-        print 'Sending sms ...'
+        print 'Send one SMS at time %s'%(time.strftime('%Y-%m-%d:%H:%M:%S',time.localtime(time.time())))
         self.smsConnection.send_sms(message)
         
     def logout(self):

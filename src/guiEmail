@@ -1,0 +1,81 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'a.ui'
+#
+# Created: Mon Dec 30 16:42:13 2013
+#      by: PyQt4 UI code generator 4.10.3
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt4 import QtCore, QtGui
+
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
+
+class Ui_Dialog(object):
+    def setupUi(self, Dialog):
+        Dialog.setObjectName(_fromUtf8("Dialog"))
+        Dialog.resize(485, 371)
+        self.pushButton = QtGui.QPushButton(Dialog)
+        self.pushButton.setGeometry(QtCore.QRect(10, 130, 75, 23))
+        self.pushButton.setObjectName(_fromUtf8("pushButton"))
+        self.userName = QtGui.QLineEdit(Dialog)
+        self.userName.setGeometry(QtCore.QRect(10, 30, 111, 20))
+        self.userName.setObjectName(_fromUtf8("userName"))
+        self.usePassword = QtGui.QLineEdit(Dialog)
+        self.usePassword.setGeometry(QtCore.QRect(10, 80, 113, 20))
+        self.usePassword.setObjectName(_fromUtf8("userPassword"))
+        self.label = QtGui.QLabel(Dialog)
+        self.label.setGeometry(QtCore.QRect(10, 10, 54, 12))
+        self.label.setObjectName(_fromUtf8("label"))
+        self.label_2 = QtGui.QLabel(Dialog)
+        self.label_2.setGeometry(QtCore.QRect(10, 60, 54, 12))
+        self.label_2.setObjectName(_fromUtf8("label_2"))
+        self.line = QtGui.QFrame(Dialog)
+        self.line.setGeometry(QtCore.QRect(113, 0, 71, 371))
+        self.line.setFrameShape(QtGui.QFrame.VLine)
+        self.line.setFrameShadow(QtGui.QFrame.Sunken)
+        self.line.setObjectName(_fromUtf8("line"))
+        self.loginStatus = QtGui.QLabel(Dialog)
+        self.loginStatus.setGeometry(QtCore.QRect(10, 240, 81, 31))
+        self.loginStatus.setObjectName(_fromUtf8("loginStatus"))
+
+        self.retranslateUi(Dialog)
+        QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), self.setStatus)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        
+
+    def retranslateUi(self, Dialog):
+        Dialog.setWindowTitle(_translate("Dialog", "Dialog", None))
+        self.pushButton.setText(_translate("Dialog", "Login", None))
+        self.label.setText(_translate("Dialog", "UserName:", None))
+        self.label_2.setText(_translate("Dialog", "PassWord", None))
+        self.loginStatus.setText(_translate("Dialog", "TextLabel", None))
+
+    def doLogin(self):
+        user_Name=self.userName.text()
+        user_Password=self.userPassword.text()
+        self.loginStatus.setText(_translate("Dialog", userName, None))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    Dialog = QtGui.QDialog()
+    ui = Ui_Dialog()
+    ui.setupUi(Dialog)
+    Dialog.show()
+    sys.exit(app.exec_())
+
+

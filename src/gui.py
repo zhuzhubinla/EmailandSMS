@@ -25,7 +25,7 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_Dialog(object):
-    emailSMTP=''
+    emailTask=''
     def setupUi(self, Dialog):
         Dialog.setObjectName(_fromUtf8("Dialog"))
         Dialog.resize(473, 334)
@@ -70,12 +70,12 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
         QtCore.QObject.connect(self.pushButtonLogin, QtCore.SIGNAL(_fromUtf8("clicked()")), self.doLogin)
-        QtCore.QObject.connect(self.pushButtonLogout, QtCore.SIGNAL(_fromUtf8("clicked()")), Dialog.accept)
+        QtCore.QObject.connect(self.pushButtonLogout, QtCore.SIGNAL(_fromUtf8("clicked()")), self.doLogout)
         QtCore.QObject.connect(self.pushButtonSend, QtCore.SIGNAL(_fromUtf8("clicked()")), self.doSendEmail)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
        
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog", None))
+        Dialog.setWindowTitle(_translate("Dialog", "EmailSender", None))
         self.pushButtonLogout.setText(_translate("Dialog", "Logout", None))
         self.pushButtonLogin.setText(_translate("Dialog", "Login", None))
         self.label.setText(_translate("Dialog", "Username:", None))
@@ -89,12 +89,12 @@ class Ui_Dialog(object):
     def doLogin(self):
         userName=self.userNamelineEdit.text()
         userPassword=self.userPasswordlineEdit.text()
-        emailTask=sendEmailTask(userName,userPassword)
-        self.emailSMTP=emailTask.createConnect()
+        self.emailTask=sendEmailTask(userName,userPassword)
+        self.emailTask.createConnect()
         self.loginStatus.setText(_translate("Dialog", userName, None))
         
     def doLogout(self):
-        self.emailSMTP.
+        self.emailTask.logout()
         
         
     def doSendEmail(self):

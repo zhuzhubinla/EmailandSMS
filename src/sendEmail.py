@@ -38,9 +38,9 @@ class sendEmailTask():
         smtp.sendmail(mail_from,mail_to,msg.as_string())
        
         
-    def logout(self,smtp):
+    def logout(self):
         print 'Logout at time %s'%(time.strftime('%Y-%m-%d:%H:%M:%S',time.localtime(time.time())))
-        smtp.quit()
+        self.smtp.quit()
         
     def getSmtp(self):
         return self.smtp

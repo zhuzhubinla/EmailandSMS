@@ -7,15 +7,17 @@ import smtplib
 import time
 
 class sendEmailTask():
-    def __init__(self):
+    def __init__(self,userName,passWord):
         self.smtp=None
+        self.userName=userName
+        self.passWord=passWord
 
     def createConnect(self):
         print('Creating connect...')
         try:
             self.smtp=smtplib.SMTP_SSL()
             self.smtp.connect('smtp.gmail.com',465)
-            self.smtp.login('binbinzhutest@gmail.com','zhuzhubin123')
+            self.smtp.login(self.userName,self.passWord)
             #smtp.sendmail(mail_from,mail_to,msg.as_string())
             #smtp.quit()
             print 'Creating connect ok...'

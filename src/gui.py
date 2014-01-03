@@ -8,6 +8,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+from sendEmail import sendEmailTask
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -24,27 +25,28 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_Dialog(object):
+    emailSMTP=''
     def setupUi(self, Dialog):
         Dialog.setObjectName(_fromUtf8("Dialog"))
         Dialog.resize(473, 334)
         self.pushButtonLogout = QtGui.QPushButton(Dialog)
-        self.pushButtonLogout.setGeometry(QtCore.QRect(100, 170, 51, 23))
+        self.pushButtonLogout.setGeometry(QtCore.QRect(90, 180, 51, 23))
         self.pushButtonLogout.setObjectName(_fromUtf8("pushButtonLogout"))
         self.pushButtonLogin = QtGui.QPushButton(Dialog)
-        self.pushButtonLogin.setGeometry(QtCore.QRect(30, 170, 51, 23))
+        self.pushButtonLogin.setGeometry(QtCore.QRect(10, 180, 51, 23))
         self.pushButtonLogin.setObjectName(_fromUtf8("pushButtonLogin"))
         self.label = QtGui.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(10, 70, 54, 12))
         self.label.setObjectName(_fromUtf8("label"))
-        self.lineEdit = QtGui.QLineEdit(Dialog)
-        self.lineEdit.setGeometry(QtCore.QRect(70, 70, 113, 20))
-        self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
+        self.userNamelineEdit = QtGui.QLineEdit(Dialog)
+        self.userNamelineEdit.setGeometry(QtCore.QRect(70, 70, 113, 20))
+        self.userNamelineEdit.setObjectName(_fromUtf8("userNamelineEdit"))
         self.label_2 = QtGui.QLabel(Dialog)
         self.label_2.setGeometry(QtCore.QRect(10, 120, 54, 12))
         self.label_2.setObjectName(_fromUtf8("label_2"))
-        self.lineEdit_2 = QtGui.QLineEdit(Dialog)
-        self.lineEdit_2.setGeometry(QtCore.QRect(70, 110, 113, 20))
-        self.lineEdit_2.setObjectName(_fromUtf8("lineEdit_2"))
+        self.userPasswordlineEdit = QtGui.QLineEdit(Dialog)
+        self.userPasswordlineEdit.setGeometry(QtCore.QRect(70, 110, 113, 20))
+        self.userPasswordlineEdit.setObjectName(_fromUtf8("userPasswordlineEdit"))
         self.line = QtGui.QFrame(Dialog)
         self.line.setGeometry(QtCore.QRect(179, 10, 51, 321))
         self.line.setFrameShape(QtGui.QFrame.VLine)
@@ -56,10 +58,22 @@ class Ui_Dialog(object):
         self.checkBox_2 = QtGui.QCheckBox(Dialog)
         self.checkBox_2.setGeometry(QtCore.QRect(220, 90, 71, 21))
         self.checkBox_2.setObjectName(_fromUtf8("checkBox_2"))
+        self.label_3 = QtGui.QLabel(Dialog)
+        self.label_3.setGeometry(QtCore.QRect(10, 150, 81, 16))
+        self.label_3.setObjectName(_fromUtf8("label_3"))
+        self.loginStatus = QtGui.QLabel(Dialog)
+        self.loginStatus.setGeometry(QtCore.QRect(100, 150, 54, 12))
+        self.loginStatus.setObjectName(_fromUtf8("loginStatus"))
+        self.pushButtonSend = QtGui.QPushButton(Dialog)
+        self.pushButtonSend.setGeometry(QtCore.QRect(390, 220, 75, 23))
+        self.pushButtonSend.setObjectName(_fromUtf8("pushButtonSend"))
 
         self.retranslateUi(Dialog)
+        QtCore.QObject.connect(self.pushButtonLogin, QtCore.SIGNAL(_fromUtf8("clicked()")), self.doLogin)
+        QtCore.QObject.connect(self.pushButtonLogout, QtCore.SIGNAL(_fromUtf8("clicked()")), Dialog.accept)
+        QtCore.QObject.connect(self.pushButtonSend, QtCore.SIGNAL(_fromUtf8("clicked()")), self.doSendEmail)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
-
+       
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(_translate("Dialog", "Dialog", None))
         self.pushButtonLogout.setText(_translate("Dialog", "Logout", None))
@@ -68,6 +82,24 @@ class Ui_Dialog(object):
         self.label_2.setText(_translate("Dialog", "Password", None))
         self.checkBox.setText(_translate("Dialog", "PNG", None))
         self.checkBox_2.setText(_translate("Dialog", "JPG", None))
+        self.label_3.setText(_translate("Dialog", "Login Status:", None))
+        self.loginStatus.setText(_translate("Dialog", "None", None))
+        self.pushButtonSend.setText(_translate("Dialog", "Send", None))
+        
+    def doLogin(self):
+        userName=self.userNamelineEdit.text()
+        userPassword=self.userPasswordlineEdit.text()
+        emailTask=sendEmailTask(userName,userPassword)
+        self.emailSMTP=emailTask.createConnect()
+        self.loginStatus.setText(_translate("Dialog", userName, None))
+        
+    def doLogout(self):
+        self.emailSMTP.
+        
+        
+    def doSendEmail(self):
+        if self.checkBox_2.isChecked():
+             self.loginStatus.setText(_translate("Dialog", "Checked", None))
 
 
 if __name__ == "__main__":

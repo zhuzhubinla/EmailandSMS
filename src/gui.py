@@ -9,6 +9,9 @@
 
 from PyQt4 import QtCore, QtGui
 from sendEmail import sendEmailTask
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
+
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -24,8 +27,9 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_Dialog(object):
+class Ui_Dialog(QtGui.QWidget):
     emailTask=''
+    file_list=[]
     def setupUi(self, Dialog):
         Dialog.setObjectName(_fromUtf8("Dialog"))
         Dialog.resize(473, 334)
@@ -91,15 +95,24 @@ class Ui_Dialog(object):
         userPassword=self.userPasswordlineEdit.text()
         self.emailTask=sendEmailTask(userName,userPassword)
         self.emailTask.createConnect()
-        self.loginStatus.setText(_translate("Dialog", userName, None))
+        self.loginStatus.setText(_translate("Dialog", self.emailTask.getLoginStatus(), None))
         
     def doLogout(self):
         self.emailTask.logout()
         
         
     def doSendEmail(self):
+        self.getCheckBoxStatus()
         if self.checkBox_2.isChecked():
-             self.loginStatus.setText(_translate("Dialog", "Checked", None))
+             self.emailTask.sendTask()
+    
+    def getCheckBoxStatus(self):
+        if self.checkBox_2.isChecked():
+            file_list.append('E:/new/a.png')
+        if len(self.file_list)==0:
+            QtGui.QMessageBox.information(self,"Message", "Please select one option?",QMessageBox.Ok)
+
+        
 
 
 if __name__ == "__main__":

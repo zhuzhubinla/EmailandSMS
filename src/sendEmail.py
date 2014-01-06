@@ -11,6 +11,7 @@ class sendEmailTask():
         self.smtp=None
         self.userName=userName
         self.passWord=passWord
+        self.loginStatus=None
 
     def createConnect(self):
         print('Creating connect...')
@@ -21,21 +22,39 @@ class sendEmailTask():
             #smtp.sendmail(mail_from,mail_to,msg.as_string())
             #smtp.quit()
             print 'Creating connect ok...'
+            self.loginStatus='OK'
         except Exception,e:
             print e
+            self.loginStatus='False'
 
         return self.smtp
     
-    def sendTask(self,smtp):
+    def sendTask(self):
         print 'Send one email at time:%s'%(time.strftime('%Y-%m-%d:%H:%M:%S',time.localtime(time.time())))
-        mail_body='test message'
-        mail_from='binbinzhutest@gmail.com'
-        mail_to=['allenbintestzhu@gmail.com']
-        msg=MIMEText(mail_body)
+        #mail_body='test message'
+        #mail_to=['allenbintestzhu@gmail.com']
+        #msg['Subject']='test email'
+        #msg['To']=';'.join(mail_to)
+        #msg['date']=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+        #self.smtp.sendmail(mail_from,mail_to,msg.as_string())
+        
+        mail_body='Send a png picture from gmail'
+        mail_from='allenbintestzhu@gmail.com'
+        mail_to=['zhu.zhubinlala@gmail.com']
+        msg=MIMEMultipart()
         msg['Subject']='test email'
         msg['To']=';'.join(mail_to)
         msg['date']=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-        smtp.sendmail(mail_from,mail_to,msg.as_string())
+        txt=MIMEText('test message')
+        msg.attach(txt)
+        picPath=['E:/new/a.png']
+        for img in picPath:
+            pic=open(img,'rb')
+            readPic=MIMEImage(pic.read())
+            msg.attach(readPic)
+            
+        self.smtp.sendmail(mail_from,mail_to,msg.as_string())
+
        
         
     def logout(self):
@@ -44,6 +63,9 @@ class sendEmailTask():
         
     def getSmtp(self):
         return self.smtp
+    
+    def getLoginStatus(self):
+        return self.loginStatus
     
     
     

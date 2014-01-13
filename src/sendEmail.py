@@ -47,7 +47,7 @@ class sendEmailTask():
         msg['date']=time.strftime('%Y-%m-%d',time.localtime(time.time()))
         txt=MIMEText('test message')
         msg.attach(txt)
-        picPath=['E:/new/a.png']
+        picPath=['./res/a.jpg']
         for img in picPath:
             pic=open(img,'rb')
             readPic=MIMEImage(pic.read())

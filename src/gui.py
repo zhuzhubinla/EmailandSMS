@@ -104,11 +104,12 @@ class Ui_Dialog(QtGui.QWidget):
     def doSendEmail(self):
         self.getCheckBoxStatus()
         if self.checkBox_2.isChecked():
-             self.emailTask.sendTask()
+            txtfile=open("\res\a.txt")
+            self.emailTask.sendTask()
     
     def getCheckBoxStatus(self):
         if self.checkBox_2.isChecked():
-            file_list.append('E:/new/a.png')
+            self.file_list.append('\res\a.png')
         if len(self.file_list)==0:
             QtGui.QMessageBox.information(self,"Message", "Please select one option?",QMessageBox.Ok)
 

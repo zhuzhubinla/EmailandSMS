@@ -11,7 +11,7 @@ from PyQt4 import QtCore, QtGui
 from sendEmail import sendEmailTask
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-
+import os
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -104,12 +104,13 @@ class Ui_Dialog(QtGui.QWidget):
     def doSendEmail(self):
         self.getCheckBoxStatus()
         if self.checkBox_2.isChecked():
-            txtfile=open("\res\a.txt")
+            print os.getcwd()
+            txtfile=open("./res/a.txt")
             self.emailTask.sendTask()
     
     def getCheckBoxStatus(self):
         if self.checkBox_2.isChecked():
-            self.file_list.append('\res\a.png')
+            self.file_list.append('.\res\a.png')
         if len(self.file_list)==0:
             QtGui.QMessageBox.information(self,"Message", "Please select one option?",QMessageBox.Ok)
 

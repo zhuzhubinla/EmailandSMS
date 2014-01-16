@@ -28,7 +28,7 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_Dialog(QtGui.QWidget):
-    emailTask=''
+    emailTask=None
     file_list=[]
     def setupUi(self, Dialog):
         Dialog.setObjectName(_fromUtf8("Dialog"))
@@ -102,20 +102,27 @@ class Ui_Dialog(QtGui.QWidget):
         
         
     def doSendEmail(self):
-        self.getCheckBoxStatus()
-        if self.checkBox_2.isChecked():
-            print os.getcwd()
-            txtfile=open("./res/a.txt")
-            self.emailTask.sendTask()
+        
+        if self.emailTask!= None:
+            if self.getCheckBoxStatus():
+                self.emailTask.sendTask()
+                self.file_list=[]
+            else:
+                QtGui.QMessageBox.information(self,"Message", "Please select one option?",QMessageBox.Ok)
+        else:
+            QtGui.QMessageBox.information(self,"Notification", "Please login?",QMessageBox.Ok)
+        
     
     def getCheckBoxStatus(self):
         if self.checkBox_2.isChecked():
-            self.file_list.append('.\res\a.png')
+            self.file_list.append('.\res\a.jpg')
+        if self.checkBox.isChecked():
+             self.file_list.append('.\res\a.png')
         if len(self.file_list)==0:
-            QtGui.QMessageBox.information(self,"Message", "Please select one option?",QMessageBox.Ok)
-
-        
-
+            return False
+        else:
+            return True
+    
 
 if __name__ == "__main__":
     import sys

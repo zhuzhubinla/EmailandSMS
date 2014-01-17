@@ -73,6 +73,7 @@ class Ui_Dialog(QtGui.QWidget):
         self.pushButtonSend.setObjectName(_fromUtf8("pushButtonSend"))
 
         self.retranslateUi(Dialog)
+        self.fillEmailAddress()
         QtCore.QObject.connect(self.pushButtonLogin, QtCore.SIGNAL(_fromUtf8("clicked()")), self.doLogin)
         QtCore.QObject.connect(self.pushButtonLogout, QtCore.SIGNAL(_fromUtf8("clicked()")), self.doLogout)
         QtCore.QObject.connect(self.pushButtonSend, QtCore.SIGNAL(_fromUtf8("clicked()")), self.doSendEmail)
@@ -90,6 +91,14 @@ class Ui_Dialog(QtGui.QWidget):
         self.loginStatus.setText(_translate("Dialog", "None", None))
         self.pushButtonSend.setText(_translate("Dialog", "Send", None))
         
+    def fillEmailAddress(self):
+        emailAccountFile=open('./res/a.txt','r')
+        emailAccount=emailAccountFile.read().split(',')
+        eamailAddress=emailAccount[0]
+        emailPassword=emailAccount[1]
+        self.userNamelineEdit.setText(eamailAddress)
+        self.userPasswordlineEdit.setText(emailPassword)
+        
     def doLogin(self):
         userName=self.userNamelineEdit.text()
         userPassword=self.userPasswordlineEdit.text()
@@ -99,6 +108,7 @@ class Ui_Dialog(QtGui.QWidget):
         
     def doLogout(self):
         self.emailTask.logout()
+        self.emailTask=None
         
         
     def doSendEmail(self):

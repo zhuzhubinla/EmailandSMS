@@ -234,13 +234,15 @@ class Ui_Dialog(QtGui.QWidget):
                     self.emailTask.sendAudio(self.audio_file)
                     self.audio_file=[]
                 if len(self.video_file)!=0:
-                    self.emailTask.sendTask(self.video_file)
+                    self.emailTask.sendVideoFile(self.video_file)
                     self.video_file=[]  
         else:
             QtGui.QMessageBox.information(self,"Notification", "Please login?",QMessageBox.Ok)
         
-    
+    # To check all checbox status and fill the check to audio,video,image file list,once send it ok
+    #w will clear the file list.
     def getCheckBoxStatus(self):
+        #send image file
         if self.checkBox_PNG.isChecked():
             self.image_file.append('./res/image/PNG_1024x769.png')
         if self.checkBox_JPG.isChecked():
@@ -248,62 +250,60 @@ class Ui_Dialog(QtGui.QWidget):
         if self.checkBox_BMP.isChecked():
             self.image_file.append('./res/image/WBMP_640x480.bmp')
         if self.checkBox_Gif.isChecked():
-            self.image_file.append('./res/image/WBMP_640x480.bmp')
+            self.image_file.append('./res/image/GIF_animation.gif')
         if self.checkBox_WBMP.isChecked():
-            self.image_file.append('./res/image/WBMP_640x480.bmp')
+            self.image_file.append('./res/image/WBMP_640x480.wbmp')
             
         if self.checkBox_AAC.isChecked():
             self.audio_file.append('./res/audio/mono_filename_48Khz_16Bit_8Kbps.aac')
         if self.checkBox_EAAC.isChecked():
-            self.audio_file.append('./res/audio/PNG_1024x769.png')
+            self.audio_file.append('./res/audio/eaac_m4a.m4a')
         if self.checkBox_EAAC1.isChecked():
-            self.audio_file.append('./res/audio/PNG_1024x769.png')
+            self.audio_file.append('./res/audio/mono_CBR_eaac_.m4a')
         if self.checkBox_IMY.isChecked():
-            self.audio_file.append('./res/audioPNG_1024x769.png')
+            self.audio_file.append('./res/imyeffect.imy')
         if self.checkBox_MID.isChecked():
-            self.audio_file.append('./res/audio/PNG_1024x769.png')
+            self.audio_file.append('./res/audio/mid.mid')
         if self.checkBox_MP3.isChecked():
             self.audio_file.append('./res/audio/mp3.mp3')
         if self.checkBox_WAV.isChecked():
-            self.audio_file.append('./res/audio/PNG_1024x769.png')
+            self.audio_file.append('./res/audio/wonder_wav.wav')
         if self.checkBox_WMA.isChecked():
-            self.audio_file.append('./res/audio/PNG_1024x769.png')
-        if self.checkBox_EAAC1.isChecked():
-            self.audio_file.append('./res/audio/PNG_1024x769.png')
+            self.audio_file.append('./res/audio/only time_wma.wma')
             
             
         if self.checkBox_H263_AAC.isChecked():
-            self.audio_file.append('./res/video/h263PNG_1024x769.png')
+            self.video_file.append('./res/video/h263/H263_aac.3gpp')
         if self.checkBox_H263_AMR.isChecked():
-            self.audio_file.append('./res/video/h263/PNG_1024x769.png')
+            self.video_file.append('./res/video/h263/H263_AMR.3gp')
         if self.checkBox_H263_MP3.isChecked():
-            self.audio_file.append('./res/video/h263/PNG_1024x769.png')
+            self.video_file.append('./res/video/h263/H263_mp3.mp4')
         if self.checkBox_H263_QCELP.isChecked():
-            self.audio_file.append('./res/video/h263/PNG_1024x769.png')
+            self.audio_file.append('./res/video/h263/h263_QCELP.3g2')
         if self.checkBox_H263_SQCP.isChecked():
-            self.audio_file.append('./res/video/h263/PNG_1024x769.png')
+            self.video_file.append('./res/video/h263/H263_SQCP.mp4')
         
         if self.checkBox_H264_AAC.isChecked():
-            self.file_list.append('./res/video/h264/PNG_1024x769.png')
+            self.video_file.append('./res/video/h264/H264_AAC.mp4')
         if self.checkBox_H264_AMR.isChecked():
-            self.file_list.append('./res/video/h264/PNG_1024x769.png')
+            self.video_file.append('./res/video/h264/H264_AMR.mp4')
         if self.checkBox_H264_MP3.isChecked():
-            self.file_list.append('./res/video/h264/PNG_1024x769.png')
+            self.video_file.append('./res/video/h264/H264_MP3.mp4')
         if self.checkBox_H264_QCELP.isChecked():
-            self.file_list.append('./res/video/h264/PNG_1024x769.png')
+            self.video_file.append('./res/video/h264/H264_QCELP.mp4')
         if self.checkBox_H264_SQCP.isChecked():
-            self.file_list.append('./res/video/h264/PNG_1024x769.png')
+            self.video_file.append('./res/video/h264/PNG_1024x769.png')
             
         if self.checkBox_MP_AAC.isChecked():
-            self.video_file.append('./res/video/mp4/PNG_1024x769.png')
+            self.video_file.append('./res/video/mp4/MPEG-4_AAC.3gpp')
         if self.checkBox_MP_AMR.isChecked():
-            self.video_file.append('./res/video/mp4/PNG_1024x769.png')
+            self.video_file.append('./res/video/mp4/PEG-4_AMR.mp4')
         if self.checkBox_MP_MP3.isChecked():
-            self.video_file.append('./res/video/mp4/PNG_1024x769.png')
+            self.video_file.append('./res/video/mp4/MPEG-4_MP3.mp4')
         if self.checkBox_MP_QCELP.isChecked():
-            self.video_file.append('./res/video/mp4/PNG_1024x769.png')
+            self.video_file.append('./res/video/mp4/MPEG-4_QCELP.3g2')
         if self.checkBox_MP_SQCP.isChecked():
-            self.video_file.append('./res/video/mp4/PNG_1024x769.png')
+            self.video_file.append('./res/video/mp4/MPEG-4_SQCP.mp4')
         
 if __name__ == "__main__":
     import sys

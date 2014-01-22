@@ -3,7 +3,9 @@ import mimetypes
 from email.MIMEText import MIMEText
 from email.MIMEImage import MIMEImage
 from email.MIMEAudio import MIMEAudio
+from email.MIMEBase import MIMEBase
 from email.MIMEMultipart import MIMEMultipart
+from email import Encoders
 import smtplib
 import time
 import os
@@ -53,8 +55,8 @@ class sendEmailTask():
             pic=open(img,'rb')
             readPic=MIMEImage(pic.read())
             msg.attach(readPic)
+            self.smtp.sendmail(mail_from,mail_to,msg.as_string())
             
-        self.smtp.sendmail(mail_from,mail_to,msg.as_string())
     def sendAudio(self,audioFilePath):
         self.audioFilePath=audioFilePath
         mail_body='Send a png picture from gmail'
@@ -70,9 +72,30 @@ class sendEmailTask():
             print os.getcwd()
             audioFileBit=open(audioFile,'rb')
             audioFileRead=MIMEAudio(audioFileBit.read())
+            audioFileRead.add_header('Content-Disposition', 'attachment; filename="ddd"')
             msg.attach(audioFileRead)
-            
-        self.smtp.sendmail(mail_from,mail_to,msg.as_string())
+            self.smtp.sendmail(mail_from,mail_to,msg.as_string())
+    
+    def sendVideoFile(self,videoFilePath):
+        self.videoFilePath=videoFilePath
+        mail_body='Send a png picture from gmail'
+        mail_from='allenbintestzhu@gmail.com'
+        mail_to=['zhu.zhubinlala@gmail.com']
+        msg=MIMEMultipart()
+        msg['Subject']='test email'
+        msg['To']=';'.join(mail_to)
+        msg['date']=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+        txt=MIMEText('test message')
+        msg.attach(txt)
+        for videoFile in videoFilePath:
+            videofFileMIME=MIMEBase('application', 'octet-stream')
+            videofFileMIME.set_payload(open(videoFile,'rb').read())
+            Encoders.encode_base64(videofFileMIME)
+            videofFileMIME.add_header('Content-Disposition', 'attachment; filename="%s"'%os.path.basename(videoFile))
+            msg.attach(videofFileMIME)
+            self.smtp.sendmail(mail_from,mail_to,msg.as_string())
+            videoFileBit.close()
+            time.sleep(10)
         
 
        
